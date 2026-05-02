@@ -1,4 +1,5 @@
-from utils import gameManager
-import pygame
+from utils.gameManager import GameManager
 
-gm = gameManager.
+
+gm = GameManager()
+gm.start_game()

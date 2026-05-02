@@ -1,13 +1,14 @@
 import random
-from card import Card
+from utils.card import Card
 
 
 class Deck:
-    def __init__(self):
+    def __init__(self, hand_size=5):
         self.suites = ["Spade", "Heart", "Club", "Diamond"]
         self.ranks = [i for i in range(6, 15)]
         self.deck = []
         self.create_deck()
+        self.hand_size = hand_size
 
     def create_deck(self):
         for suite in self.suites:
@@ -29,6 +30,23 @@ class Deck:
                 rand_index = random.randint(0, len(dummy)-1)
                 self.deck.append(dummy[rand_index])
                 dummy.pop(rand_index)
+
+    def choose_rand_card(self) -> list:
+        player_cards = []
+        for _ in range(self.hand_size):
+            rand_index = random.randint(0,len(self.deck)-1)
+            player_cards.append(self.deck[rand_index])
+
+        return player_cards
+
+
+    def serve(self,number_of_players) -> (list, list):
+        cards = []
+        for num in range(number_of_players):
+            # Serve cards for each user
+            player_cards = self.choose_rand_card()
+            cards.append(player_cards)
+        return cards
 
 
 if __name__ == "__main__":
